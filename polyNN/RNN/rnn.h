@@ -7,91 +7,64 @@
  *
  * Web address: http://polybench.sourceforge.net
  */
-#ifndef _CNN_H
-# define _CNN_H
+#ifndef _RNN_H
+# define _RNN_H
 
 /* Default to LARGE_DATASET. */
 # if !defined(MINI_DATASET) && !defined(SMALL_DATASET) && !defined(MEDIUM_DATASET) && !defined(LARGE_DATASET) && !defined(EXTRALARGE_DATASET)
 #  define LARGE_DATASET
 # endif
 
-# if !defined(NN) && !defined(NK) && !defined(NP) && !defined(NQ) && !defined(NC) && !defined(NR) && !defined(NS) && !defined(NW) && !defined(NH) 
+# if !defined(NT) && !defined(NP) && !defined(NQ) && !defined(NS)  && !defined(BT) 
 /* Define sample dataset sizes. */
 #  ifdef MINI_DATASET
-#   define NU 2
-#   define NV 2
-#   define NR 3
-#   define NS 3
-#   define NH 10
-#   define NW 10
-#   define NC 10
-#   define NK 7
-#   define NN 5
+#   define BT 1
+#   define NT 20
+#   define NP 20
+#   define NQ 25
+#   define NS 30
 #  endif 
 
 #  ifdef SMALL_DATASET
-#   define NU 3
-#   define NV 3
-#   define NR 4
-#   define NS 4
-#   define NH 20
-#   define NW 20
-#   define NC 20
-#   define NK 15
-#   define NN 10
+#   define BT 2
+#   define NT 60
+#   define NP 80
+#   define NQ 100
+#   define NS 110
 #  endif 
 
 #  ifdef MEDIUM_DATASET
-#   define NU 4
-#   define NV 4
-#   define NR 5
-#   define NS 5
-#   define NH 40
-#   define NW 40
-#   define NC 50
-#   define NK 25
-#   define NN 25
+#   define BT 3
+#   define NT 100
+#   define NP 200
+#   define NQ 250
+#   define NS 310
 #  endif 
 
 #  ifdef LARGE_DATASET
-#   define NU 5
-#   define NV 5
-#   define NR 6
-#   define NS 6
-#   define NH 50
-#   define NW 50
-#   define NC 75
-#   define NK 40
-#   define NN 50
+#   define BT 4
+#   define NT 500
+#   define NP 500
+#   define NQ 650
+#   define NS 700
 #  endif 
 
 #  ifdef EXTRALARGE_DATASET
-#   define NU 5
-#   define NV 5
-#   define NR 6
-#   define NS 6
-#   define NH 75
-#   define NW 75
-#   define NC 100
-#   define NK 40
-#   define NN 100
+#   define BT 5
+#   define NT 1000
+#   define NP 1000
+#   define NQ 1500
+#   define NS 2000
 #  endif 
 
 
-#endif /* !(NU NV NR NS NH NW NC NK NN) */
+#endif /* !(NT NP NQ NS BT) */
 
-#   define NP (NH - NR)/NU + 1 
-#   define NQ (NW - NS)/NV + 1 
-
-# define _PB_NN POLYBENCH_LOOP_BOUND(NN,nn)
-# define _PB_NK POLYBENCH_LOOP_BOUND(NK,nk)
+# define _PB_NT POLYBENCH_LOOP_BOUND(NT,nt)
 # define _PB_NP POLYBENCH_LOOP_BOUND(NP,np)
 # define _PB_NQ POLYBENCH_LOOP_BOUND(NQ,nq)
-# define _PB_NC POLYBENCH_LOOP_BOUND(NC,nc)
-# define _PB_NR POLYBENCH_LOOP_BOUND(NR,nr)
 # define _PB_NS POLYBENCH_LOOP_BOUND(NS,ns)
-# define _PB_NH POLYBENCH_LOOP_BOUND(NH,nh)
-# define _PB_NW POLYBENCH_LOOP_BOUND(NW,nw)
+# define _PB_BT POLYBENCH_LOOP_BOUND(BT,bt)
 
 
 /* Default data type */
@@ -122,5 +95,6 @@
 #  define POW_FUN(x,y) pow(x,y)
 # endif
 
-#endif /* !_GEMM_H */
+#endif /* !_RNN_H */
 
+#define MAX(x, y) (((x) > (y)) ? (x) : (y))
